@@ -9,14 +9,14 @@ public class Tokens {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private String userId;
 
     private String token;
 
     @Column(name = "expiration_time")
     private LocalDateTime expirationTime;
 
-    public Tokens(long userId, String token, LocalDateTime expirationTime) {
+    public Tokens(String userId, String token, LocalDateTime expirationTime) {
         this.userId = userId;
         this.token = token;
         this.expirationTime = expirationTime;
@@ -25,11 +25,11 @@ public class Tokens {
     public Tokens() {
     }
 
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

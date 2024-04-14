@@ -22,7 +22,7 @@ public class GenerateData implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         userRepo.deleteAll();
-        Users user = new Users(1L, "admin", "admin@lms.edu", "admin", "admin");
+        Users user = new Users("admin", "admin", "admin@lms.edu", "admin", "admin");
         userRepo.save(user);
         System.out.println("User created successfully with ID: " + user.getUserId());
     }

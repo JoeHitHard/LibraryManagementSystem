@@ -20,7 +20,7 @@ public class AuthService {
     @Autowired
     TokenRepo tokenRepo;
 
-    public Tokens login(long userId, String password) throws InvalidAuthException {
+    public Tokens login(String userId, String password) throws InvalidAuthException {
         Optional<Users> user = userRepo.findById(userId);
         if (user.isPresent()) {
             if (user.get().getPassword().equals(password)) {
@@ -34,11 +34,15 @@ public class AuthService {
     }
 
     public Users getUsersResponseEntity(String authorizationHeader) throws InvalidAuthException {
-        Tokens token = tokenRepo.findByToken(authorizationHeader);
-        Optional<Users> byId = userRepo.findById(token.getUserId());
+        Optional<Users> byId = getUser(authorizationHeader);
         if (byId.isPresent()) {
             return byId.get();
         }
         throw new InvalidAuthException();
+    }
+
+    private Optional<Users> getUser(String authorizationHeader) {
+        Tokens token = tokenRepo.findByToken(authorizationHeader);
+        return userRepo.findById(token.getUserId());
     }
 }
