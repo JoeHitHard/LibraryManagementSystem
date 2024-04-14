@@ -41,7 +41,7 @@ public class AuthService {
         throw new InvalidAuthException();
     }
 
-    private Optional<Users> getUser(String authorizationHeader) {
+    public Optional<Users> getUser(String authorizationHeader) {
         Tokens token = tokenRepo.findByToken(authorizationHeader);
         return userRepo.findById(token.getUserId());
     }

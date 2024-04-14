@@ -23,6 +23,46 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/lms" name="lms">
+                <projects>
+                  <project path="$PROJECT_DIR$/lms" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/book-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/book-service" />
+            <option value="$PROJECT_DIR$/lms" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/lms" name="lms">
+                <projects>
+                  <project path="$PROJECT_DIR$/lms" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/lend-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/lend-service" />
+            <option value="$PROJECT_DIR$/lms" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/lms" />
         <option name="modules">
           <set>

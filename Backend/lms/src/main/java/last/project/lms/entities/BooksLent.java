@@ -11,5 +11,30 @@ public class BooksLent {
     private long lentId;
 
     private String userId;
-    private String bookId;
+    private long bookId;
+
+
+    public long getLentId() {
+        return lentId;
+    }
+
+    public void setLentId(long lentId) {
+        this.lentId = lentId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public long getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(long bookId) {
+        this.bookId = bookId;
+    }
 }

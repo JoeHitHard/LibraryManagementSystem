@@ -5,6 +5,7 @@ import last.project.lms.service.AuthService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,5 +25,9 @@ public class UserController {
     public ResponseEntity login(@RequestBody String userDataString, @RequestHeader("Authorization") @DefaultValue("XXX") String authorizationHeader) throws InvalidAuthException {
         JSONObject userDetails = new JSONObject(userDataString);
         return ResponseEntity.ok(authService.login(userDetails.getString("userId"), userDetails.getString("password")));
+    }
+    @ExceptionHandler(InvalidAuthException.class)
+    public ResponseEntity<Object> handleInvalidAuthException(InvalidAuthException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
     }
 }
