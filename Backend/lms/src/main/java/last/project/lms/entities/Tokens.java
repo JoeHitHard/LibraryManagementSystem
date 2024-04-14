@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 public class Tokens {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String userId;
 
     private String token;
