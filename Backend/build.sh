@@ -5,7 +5,7 @@ cd ./lms || exit
 cd ..
 
 
-cd ./auth-service || exit
+cd ./user-service || exit
 ./gradlew clean build
 cd ..
 

@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  auth-service:
+  user-service:
     build:
-      context: ./auth-service
+      context: ./user-service
       dockerfile: Dockerfile
     depends_on:
       - postgres
@@ -12,7 +12,7 @@ services:
     networks:
       - library-network
 
-  ride-service:
+  book-service:
     build:
       context: ./book-service
       dockerfile: Dockerfile
@@ -23,7 +23,7 @@ services:
     networks:
       - library-network
 
-  chat-service:
+  lend-service:
     build:
       context: ./lend-service
       dockerfile: Dockerfile
@@ -41,7 +41,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: lms_database
+      POSTGRES_DB: lms
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
     networks:

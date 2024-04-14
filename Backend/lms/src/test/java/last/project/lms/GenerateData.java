@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import static java.lang.System.exit;
+
 @SpringBootApplication
 public class GenerateData implements CommandLineRunner {
 
@@ -25,5 +27,6 @@ public class GenerateData implements CommandLineRunner {
         Users user = new Users("admin", "admin", "admin@lms.edu", "admin", "admin");
         userRepo.save(user);
         System.out.println("User created successfully with ID: " + user.getUserId());
+        exit(0);
     }
 }

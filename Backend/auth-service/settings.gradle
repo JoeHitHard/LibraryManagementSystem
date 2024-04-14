@@ -1,4 +1,0 @@
-rootProject.name = 'auth-service'
-
-includeBuild '../lms'
-

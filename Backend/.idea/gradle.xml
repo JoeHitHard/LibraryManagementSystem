@@ -14,26 +14,6 @@
             </builds>
           </compositeBuild>
         </compositeConfiguration>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/auth-service" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/auth-service" />
-            <option value="$PROJECT_DIR$/lms" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT">
-            <builds>
-              <build path="$PROJECT_DIR$/lms" name="lms">
-                <projects>
-                  <project path="$PROJECT_DIR$/lms" />
-                </projects>
-              </build>
-            </builds>
-          </compositeBuild>
-        </compositeConfiguration>
         <option name="externalProjectPath" value="$PROJECT_DIR$/book-service" />
         <option name="modules">
           <set>
@@ -67,6 +47,26 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/lms" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/lms" name="lms">
+                <projects>
+                  <project path="$PROJECT_DIR$/lms" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/user-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/lms" />
+            <option value="$PROJECT_DIR$/user-service" />
           </set>
         </option>
       </GradleProjectSettings>
