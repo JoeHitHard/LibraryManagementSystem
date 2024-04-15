@@ -8,10 +8,15 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface LentRepo extends JpaRepository<BooksLent, Long> {
     @Transactional
     @Modifying
     @Query("DELETE FROM BooksLent l WHERE l.bookId = :bookId")
     void deleteByBookId(long bookId);
+
+    List<BooksLent> findAllByUserId(String userId);
+
 }

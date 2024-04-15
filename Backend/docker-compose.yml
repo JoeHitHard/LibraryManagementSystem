@@ -19,7 +19,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - "8082:8083"
+      - "8082:8082"
     networks:
       - library-network
 

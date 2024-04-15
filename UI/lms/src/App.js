@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 // import Signup from './components/Signup';
-// import Dashboard from './components/Dashboard';
+import Dashboard from './components/Dashboard';
 // import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -18,16 +18,14 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        {/* {isLoggedIn === true &&  <Route
+      {isLoggedIn !== true &&<Route path="/" element={<Login setIsLoggedIn={setIsLoggedIn} />} /> }
+        {isLoggedIn === true &&  <Route
           path="/"
           element={
-            <PrivateRoute isLoggedIn={isLoggedIn}>
-              <Dashboard />
-            </PrivateRoute>
+            <Dashboard />
           }
         />}
-        <Route
+        {/* <Route
           path="/dashboard"
           element={
             <PrivateRoute isLoggedIn={isLoggedIn}>

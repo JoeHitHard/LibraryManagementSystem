@@ -7,6 +7,8 @@ import last.project.lms.exceptions.InvalidAuthException;
 import last.project.lms.repo.BookRepo;
 import last.project.lms.repo.LentRepo;
 import last.project.lms.service.AuthService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/lend")
 public class LendController {
+    private static final Logger logger = LoggerFactory.getLogger(LendController.class);
+
 
     @Autowired
     LentRepo lentRepo;
@@ -34,8 +38,15 @@ public class LendController {
     }
 
     @GetMapping("")
-    public ResponseEntity getAllLends() throws InvalidAuthException {
-        return ResponseEntity.ok(lentRepo.findAll());
+    public ResponseEntity getAllLends(@RequestHeader("Authorization") @DefaultValue("XXX") String authorizationHeader) throws InvalidAuthException {
+        Optional<Users> user = authService.getUser(authorizationHeader);
+        if(user.isPresent()) {
+            if (user.get().getRole().equals("admin")) {
+                return ResponseEntity.ok(lentRepo.findAll());
+            }
+            return ResponseEntity.ok(lentRepo.findAllByUserId(user.get().getUserId()));
+        }
+        throw new InvalidAuthException("Invalid Auth");
     }
 
     @PostMapping("")
@@ -92,10 +103,10 @@ public class LendController {
     public ResponseEntity deleteLend(@PathVariable("lendId") String lendId, @RequestHeader("Authorization") @DefaultValue("XXX") String authorizationHeader) throws InvalidAuthException {
         Optional<Users> user = authService.getUser(authorizationHeader);
         if (user.isPresent()) {
-            if (user.get().getRole().equals("user")) {
-                Optional<BooksLent> lendOp = lentRepo.findById(Long.valueOf(lendId));
-                if (lendOp.isPresent()) {
-                    BooksLent lend = lendOp.get();
+            Optional<BooksLent> lendOp = lentRepo.findById(Long.valueOf(lendId));
+            if (lendOp.isPresent()) {
+                BooksLent lend = lendOp.get();
+                if ((user.get().getRole().equals("user") && lend.getUserId().equals(user.get().getUserId())) || user.get().getRole().equals("admin")) {
                     Optional<Books> byId = bookRepo.findById(lend.getBookId());
                     if (byId.isPresent()) {
                         Books book = byId.get();
@@ -108,15 +119,21 @@ public class LendController {
                     }
                     throw new RuntimeException("Invalid Book ID: " + lend.getBookId());
                 }
-                throw new RuntimeException("Invalid Lend ID: " + lendId);
+                throw new InvalidAuthException("only owners can delete");
             }
-            throw new InvalidAuthException("only users and take books");
+            throw new RuntimeException("Invalid Lend ID: " + lendId);
         }
         throw new InvalidAuthException("Invalid Auth");
     }
 
     @ExceptionHandler(InvalidAuthException.class)
     public ResponseEntity<Object> handleInvalidAuthException(InvalidAuthException ex) {
+        logger.error("failed because: {}", ex.getMessage(), ex);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+    }
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Object> handleRuntimeException(RuntimeException ex) {
+        logger.error("failed because: {}", ex.getMessage(), ex);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
     }
 }
