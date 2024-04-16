@@ -16,7 +16,7 @@ function Login({ setIsLoggedIn }) {
         localStorage.setItem('jwtToken', response.data.token);
         localStorage.setItem('userId', response.data.userId);
         setIsLoggedIn(true);
-        window.location.href = "/dashboard"
+        window.location.href = "/"
       } else {
         window.location.href = "/login"
         setError('Invalid username or password');
