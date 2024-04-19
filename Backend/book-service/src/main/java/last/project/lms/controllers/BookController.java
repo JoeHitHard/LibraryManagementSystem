@@ -50,6 +50,7 @@ public class BookController {
                 logger.info("Row saved to backend");
                 return ResponseEntity.ok(book);
             }
+            throw new InvalidAuthException("Invalid Auth");
         }
         throw new InvalidAuthException("Invalid Auth");
     }
@@ -85,6 +86,7 @@ public class BookController {
                 bookRepo.flush();
                 return ResponseEntity.ok(bookId);
             }
+            throw new InvalidAuthException("Invalid Auth");
         }
         throw new InvalidAuthException("Invalid Auth");
     }
