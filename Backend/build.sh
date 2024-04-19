@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 cd ./lms || exit
 ./gradlew clean build publishToMavenLocal
